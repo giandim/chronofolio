@@ -1,0 +1,23 @@
+:root {
+  --tile-size: 62px;
+  --col-number: 107;
+}
+
+body {
+  margin: 0;
+}
+
+#monitor {
+  display: grid;
+  border: 1px solid;
+  grid-template-columns: repeat(
+    var(--col-number),
+    var(--tile-size)
+  );
+}
+
+#monitor > div {
+  height: var(--tile-size);
+  width: var(--tile-size);
+  border: 1px solid #000;
+}

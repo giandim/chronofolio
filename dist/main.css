@@ -1,0 +1,14 @@
+:root {
+}
+
+body {
+  margin: 0;
+  position: relative;
+}
+
+#monitor {
+  position: absolute; border: 1px solid;
+}
+
+#monitor > div {
+}
