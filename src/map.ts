@@ -1,25 +1,49 @@
 import { MAP_SIZE } from "./constants";
 
-type Tile = {
-  isBlocking: boolean;
-  layers: Layer[];
-}
+type Tileset = {
+  tilesetSize: number;
+  tilesetColumns: number;
+  tilesetRows: number;
+  tileSize: number;
+  file: HTMLImageElement;
+};
 
-type Layer = {
-  materialId: number;
-  tileId: number;
-}
-
-export type Map = {
-  tiles: Tile[][]
-}
-
-export function generateMap(): Map {
-  return {
-    tiles: Array.from({ length: MAP_SIZE }, () =>
-      Array.from({ length: MAP_SIZE }, () => (
-        { isBlocking: false, layers: [{ materialId: 1, tileId: 1 }] }
-      ))
-    )
+class ImageFactory {
+  static create(src: string): HTMLImageElement {
+    const img = new Image();
+    img.src = src;
+    return img;
   }
 }
+
+export const Materials: Record<number, Tileset> = {
+  1: {
+    tilesetSize: 640,
+    tilesetColumns: 10,
+    tilesetRows: 4,
+    tileSize: 64,
+    file: ImageFactory.create("./tilemap-flat.png")
+  }
+}
+
+export class Map {
+  layers = generateMap();
+
+  constructor() { }
+
+  getTilesetImage(materialId: number): HTMLImageElement {
+    return Materials[materialId]?.file
+  }
+}
+
+export function generateMap(): number[][] {
+  return (
+    Array.from({ length: MAP_SIZE }, () =>
+      Array.from({ length: MAP_SIZE }, () => (
+        12
+      ))
+    )
+  )
+}
+
+
